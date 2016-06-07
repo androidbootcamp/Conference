@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Conference</string>
+  <string name="no_network_error_message">There is no network.</string>
+  <string name="ok">OK</string>
+</resources>
