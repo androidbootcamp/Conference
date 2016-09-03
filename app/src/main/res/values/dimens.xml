@@ -1,0 +1,7 @@
+<resources>
+  <dimen name="padding_small">8dp</dimen>
+  <dimen name="padding">16dp</dimen>
+  <dimen name="agenda_card_image_height">60dp</dimen>
+  <dimen name="normal_text_size">25sp</dimen>
+  <dimen name="smaller_text_size">20sp</dimen>
+</resources>

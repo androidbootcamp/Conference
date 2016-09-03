@@ -6,7 +6,7 @@
                android:icon="@mipmap/ic_launcher"
                android:label="@string/app_name"
                android:supportsRtl="true"
-               android:theme="@style/AppTheme">
+               android:theme="@style/MyTheme">
     <meta-data
       android:name="DATABASE"
       android:value="sugar_eventapp.db" />
@@ -18,11 +18,10 @@
       android:value="true" />
     <meta-data
       android:name="DOMAIN_PACKAGE_NAME"
-      android:value="thoughtworks.eventapp" />
+      android:value="com.thoughtworks.conference" />
 
   </application>
 
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
 </manifest>
