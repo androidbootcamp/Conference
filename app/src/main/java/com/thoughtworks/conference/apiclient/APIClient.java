@@ -3,12 +3,21 @@ package com.thoughtworks.conference.apiclient;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
+import com.google.firebase.database.ValueEventListener;
 import com.thoughtworks.conference.R;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class APIClient {
 
@@ -18,22 +27,31 @@ public class APIClient {
     this.context = context;
   }
 
-  public <T> void get(String url, final APIClientCallback<T> apiClientCallback) {
-    Firebase firebase = new Firebase(url);
-    if(!isConnectedToInternet())
+  public <T> void get(final APIClientCallback<T> apiClientCallback) {
+    DatabaseReference firebase = FirebaseDatabase.getInstance().getReference();
+    if (!isConnectedToInternet())
       apiClientCallback.onFailure(new NetworkException(context.getString(R.string.no_network_error_message)));
-    else
+    else {
       firebase.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot snapshot) {
-          T response = snapshot.getValue(apiClientCallback.getClassOfType());
-          apiClientCallback.onSuccess(response);
+          HashMap response = (HashMap) snapshot.getValue();
+          ObjectMapper objectMapper = new ObjectMapper();
+          try {
+            T parsedResponse = objectMapper.readValue(objectMapper.writeValueAsString(response), apiClientCallback.getClassOfType());
+            apiClientCallback.onSuccess(parsedResponse);
+          } catch (IOException e) {
+            //e.printStackTrace();
+            Log.d("API CLient", "Unable to parse the data: " + apiClientCallback.getClassOfType());
+            throw new RuntimeException(e);
+          }
         }
 
         @Override
-        public void onCancelled(FirebaseError error) {
+        public void onCancelled(DatabaseError error) {
         }
       });
+    }
   }
 
   private boolean isConnectedToInternet() {

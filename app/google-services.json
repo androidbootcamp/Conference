@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "754555911124",
+    "firebase_url": "https://conference-9ed4c.firebaseio.com",
+    "project_id": "conference-9ed4c",
+    "storage_bucket": "conference-9ed4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754555911124:android:009de14e83b1032a",
+        "android_client_info": {
+          "package_name": "com.thoughtworks.conference"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754555911124-ej7l18kbkn685be6tmuqdscobrmjjkql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8PLHf3n6wYjrxYDaHzBwQm-9FEpXetpc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
