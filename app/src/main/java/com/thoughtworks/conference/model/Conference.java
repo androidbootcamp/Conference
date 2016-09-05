@@ -1,5 +1,6 @@
 package com.thoughtworks.conference.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Conference {
@@ -8,7 +9,7 @@ public class Conference {
   public Conference(){
   }
 
-  public Conference(List<Session> sessions){
-    this.sessions = sessions;
+  public Conference(Session... sessions){
+    this.sessions = Arrays.asList(sessions);
   }
 }
