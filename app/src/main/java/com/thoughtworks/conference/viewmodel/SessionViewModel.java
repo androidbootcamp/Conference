@@ -31,4 +31,19 @@ public class SessionViewModel {
     String formattedMinutes = numberOfMinutes == 0 ? "" : numberOfMinutes + "min";
     return (formattedHours + formattedMinutes).trim();
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    SessionViewModel that = (SessionViewModel) o;
+
+    return session != null ? session.equals(that.session) : that.session == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return session != null ? session.hashCode() : 0;
+  }
 }
