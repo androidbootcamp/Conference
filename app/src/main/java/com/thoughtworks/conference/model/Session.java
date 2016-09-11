@@ -93,4 +93,33 @@ public class Session implements Parcelable {
     parcel.writeLong(endTime.getTime());
     parcel.writeString(category.name());
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Session session = (Session) o;
+
+    if (name != null ? !name.equals(session.name) : session.name != null) return false;
+    if (description != null ? !description.equals(session.description) : session.description != null)
+      return false;
+    if (startTime != null ? !startTime.equals(session.startTime) : session.startTime != null)
+      return false;
+    if (endTime != null ? !endTime.equals(session.endTime) : session.endTime != null) return false;
+    if (category != session.category) return false;
+    return location != null ? location.equals(session.location) : session.location == null;
+
+  }
+
+  @Override
+  public int hashCode() {
+    int result = name != null ? name.hashCode() : 0;
+    result = 31 * result + (description != null ? description.hashCode() : 0);
+    result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+    result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
+    result = 31 * result + (category != null ? category.hashCode() : 0);
+    result = 31 * result + (location != null ? location.hashCode() : 0);
+    return result;
+  }
 }

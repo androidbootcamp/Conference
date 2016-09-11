@@ -29,12 +29,28 @@ public class SessionDAO extends SugarRecord {
     return new SessionDAO(session.getName(), session.getStartTime(), session.getEndTime(), session.getDescription(), session.getLocation(), session.getCategory());
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
   public Date getStartTime() {
     return startTime;
   }
 
   public Date getEndTime() {
     return endTime;
+  }
+
+  public String getName(){
+    return name;
   }
 
   public Session toSession() {
