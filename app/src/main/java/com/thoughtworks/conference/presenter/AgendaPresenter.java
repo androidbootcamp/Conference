@@ -35,6 +35,8 @@ public class AgendaPresenter {
 
       @Override
       public void onFailure(Exception e) {
+        agendaView.dismissProgressDialog();
+        agendaView.showErrorDialog(e.getMessage());
       }
 
       @Override

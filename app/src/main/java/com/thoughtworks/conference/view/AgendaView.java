@@ -10,4 +10,6 @@ public interface AgendaView {
   void showProgressDialog();
 
   void dismissProgressDialog();
+
+  void showErrorDialog(String message);
 }
