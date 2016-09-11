@@ -1,5 +1,7 @@
 package com.thoughtworks.conference.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.thoughtworks.conference.apiclient.APIClient;
 import com.thoughtworks.conference.apiclient.APIClientCallback;
 import com.thoughtworks.conference.model.Category;
@@ -40,8 +42,9 @@ public class AgendaPresenter {
       }
 
       @Override
+      @NonNull
       public Class<Conference> getClassOfType() {
-        return null;
+        return Conference.class;
       }
     });
   }

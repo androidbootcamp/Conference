@@ -4,12 +4,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.thoughtworks.conference.R;
 import com.thoughtworks.conference.apiclient.APIClient;
 import com.thoughtworks.conference.model.Session;
+import com.thoughtworks.conference.presenter.AgendaPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +19,14 @@ import java.util.List;
 public class AgendaActivity extends AppCompatActivity implements AgendaView {
 
   private ProgressDialog progressDialog;
+  private AgendaPresenter agendaPresenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_agenda);
+    agendaPresenter = new AgendaPresenter(getApiClient(), this);
+    agendaPresenter.presentConference();
   }
 
   @NonNull
@@ -31,6 +36,9 @@ public class AgendaActivity extends AppCompatActivity implements AgendaView {
 
   @Override
   public void render(List<ArrayList<Session>> sessionsFilteredByCategory) {
+    ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+    ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), sessionsFilteredByCategory);
+    viewPager.setAdapter(adapter);
   }
 
   @Override
