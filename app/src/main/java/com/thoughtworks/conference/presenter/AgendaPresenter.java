@@ -22,11 +22,11 @@ public class AgendaPresenter {
   public void presentConference() {
     agendaView.showProgressDialog();
     apiClient.get(new APIClientCallback<Conference>() {
-      List<List<Session>> sessionsByCategory = new ArrayList<>();
+      List<ArrayList<Session>> sessionsByCategory = new ArrayList<>();
       @Override
       public void onSuccess(Conference conference) {
         for (Category category : Category.values()) {
-          final List<Session> sessions = conference.filterByCategory(category);
+          final ArrayList<Session> sessions = conference.filterByCategory(category);
           sessionsByCategory.add(sessions);
         }
         agendaView.render(sessionsByCategory);

@@ -2,10 +2,11 @@ package com.thoughtworks.conference.view;
 
 import com.thoughtworks.conference.model.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface AgendaView {
-  void render(List<List<Session>> conference);
+  void render(List<ArrayList<Session>> sessionsFilteredByCategory);
 
   void showProgressDialog();
 

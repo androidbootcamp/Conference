@@ -45,16 +45,22 @@ public class TrackAdapter extends BaseAdapter {
       convertView = inflater.inflate(R.layout.session, parent, false);
       viewHolder = new ViewHolder();
       viewHolder.date = (TextView) convertView.findViewById(R.id.date);
+      viewHolder.location = (TextView) convertView.findViewById(R.id.location);
+      viewHolder.title = (TextView) convertView.findViewById(R.id.title);
       convertView.setTag(viewHolder);
     }
 
     viewHolder = (ViewHolder) convertView.getTag();
     SessionViewModel session = sessions.get(position);
     viewHolder.date.setText(session.getDisplayTime());
+    viewHolder.location.setText(session.getLocation());
+    viewHolder.title.setText(session.getName());
     return convertView;
   }
 
   protected class ViewHolder {
     TextView date;
+    TextView title;
+    TextView location;
   }
 }

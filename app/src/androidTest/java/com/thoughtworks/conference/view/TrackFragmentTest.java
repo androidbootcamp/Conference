@@ -9,6 +9,7 @@ import com.thoughtworks.conference.model.Session;
 import com.thoughtworks.conference.rules.FragmentTestRule;
 import com.thoughtworks.conference.viewmodel.SessionViewModel;
 
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.thoughtworks.conference.testdata.TestDataCreator.parseDate;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.core.AllOf.allOf;
 
 @RunWith(AndroidJUnit4.class)
 public class TrackFragmentTest {
@@ -53,5 +55,12 @@ public class TrackFragmentTest {
     onView(withId(R.id.list_view)).check(matches(isDisplayed()));
     onData(instanceOf(SessionViewModel.class)).inAdapterView(withId(R.id.list_view))
         .atPosition(0).onChildView(withId(R.id.date)).check(matches(withText("03:30 AM - 04:30 AM (1h)")));
+    onData(allOf(instanceOf(SessionViewModel.class))).inAdapterView(withId(R.id.list_view))
+        .atPosition(0).onChildView(withId(R.id.location)).check(matches(withText("Ballroom")));
+     onData(allOf(instanceOf(SessionViewModel.class))).inAdapterView(withId(R.id.list_view))
+         .atPosition(0).onChildView(withId(R.id.title)).check(matches(withText("Craft")));
+
   }
+
+
 }

@@ -9,6 +9,14 @@ import java.util.concurrent.TimeUnit;
 public class SessionViewModel {
   private final Session session;
 
+  public String getLocation() {
+    return session.getLocation();
+  }
+
+  public String getName() {
+    return session.getName();
+  }
+
   public SessionViewModel(Session session) {
     this.session = session;
   }

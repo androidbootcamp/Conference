@@ -32,7 +32,7 @@ public class AgendaPresenterTest {
   private AgendaPresenter agendaPresenter;
   private Conference conference;
   private AgendaView mockAgendaView;
-  private List<List<Session>> sessionsByCategory;
+  private List<ArrayList<Session>> sessionsByCategory;
 
   @Before
   public void setUp() {
@@ -54,10 +54,10 @@ public class AgendaPresenterTest {
     }).when(mockApiClient).get(any(APIClientCallback.class));
 
     sessionsByCategory = new ArrayList<>();
-    List<Session> createSessionList = new ArrayList<>();
+    ArrayList<Session> createSessionList = new ArrayList<>();
     createSessionList.add(session1);
-    List<Session> aspireSessionList = new ArrayList<>();
-    List<Session> belongSessionList = new ArrayList<>();
+    ArrayList<Session> aspireSessionList = new ArrayList<>();
+    ArrayList<Session> belongSessionList = new ArrayList<>();
     belongSessionList.add(session2);
     sessionsByCategory.add(createSessionList);
     sessionsByCategory.add(aspireSessionList);

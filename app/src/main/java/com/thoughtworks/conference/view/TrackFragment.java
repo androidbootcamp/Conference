@@ -1,6 +1,5 @@
 package com.thoughtworks.conference.view;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ import com.thoughtworks.conference.viewmodel.TrackViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class TrackFragment extends Fragment {
   public static String SESSION_LIST_EXTRA_KEY =
