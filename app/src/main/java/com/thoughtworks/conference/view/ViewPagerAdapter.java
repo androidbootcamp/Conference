@@ -36,4 +36,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
   public int getCount() {
     return categories.length;
   }
+
+  @Override
+  public CharSequence getPageTitle(int position) {
+    return categories[position].name();
+  }
 }

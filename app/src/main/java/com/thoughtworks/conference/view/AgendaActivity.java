@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -36,9 +37,11 @@ public class AgendaActivity extends AppCompatActivity implements AgendaView {
 
   @Override
   public void render(List<ArrayList<Session>> sessionsFilteredByCategory) {
+    TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
     ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
     ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), sessionsFilteredByCategory);
     viewPager.setAdapter(adapter);
+    tabLayout.setupWithViewPager(viewPager);
   }
 
   @Override
