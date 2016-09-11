@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Conference</string>
   <string name="loading">Fetching Sessions</string>
   <string name="save">Save</string>
   <string name="no_network_error_message">There is no network.</string>
   <string name="ok">OK</string>
-  <string name="timing_overlap">Timing of %1$s overlaps with timing of %2$s</string>
+  <string name="timing_overlap_message">Timing of %1$s overlaps with timing of %2$s</string>
+  <string name="timing_overlap_header">Conflict</string>
   <string name="session_saved">Session successfully saved</string>
 </resources>

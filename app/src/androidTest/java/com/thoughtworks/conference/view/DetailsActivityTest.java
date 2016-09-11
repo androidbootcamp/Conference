@@ -70,4 +70,17 @@ public class DetailsActivityTest {
         getActivity().getWindow().getDecorView()))).check(matches(isDisplayed()));
     onView(withId(R.id.save)).check(matches(withDrawable(R.drawable.star_orange)));
   }
+
+  @Test
+  public void showDialogIfConflictingSessionExists() throws ParseException {
+    Intent intent = new Intent();
+    Session sessionInTrackTwo = new Session("Craft", "Try your hand at craft",
+        parseDate("2016-05-23T17:15:00+05:30"), parseDate("2016-05-23T20:15:00+05:30"), Category.CREATE, "Ballroom");
+    SessionDAO.createFrom(sessionInTrackTwo).save();
+    intent.putExtra(DetailsActivity.SESSION_BUNDLE_PARAM, sessionInTrackOne);
+
+    activityTestRule.launchActivity(intent);
+    onView(withId(R.id.save)).perform(click());
+    onView(withText("Timing of Craft overlaps with timing of Keynote")).check(matches(isDisplayed()));
+  }
 }

@@ -1,6 +1,7 @@
 package com.thoughtworks.conference.view;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailView {
   }
 
   public void saveSession(View view) {
-    detailsPresenter.saveSession(session);
+    detailsPresenter.addSession(session);
   }
 
   @Override
@@ -58,6 +59,15 @@ public class DetailsActivity extends AppCompatActivity implements DetailView {
   public void updateView() {
     final ImageView save = (ImageView) findViewById(R.id.save);
     save.setImageResource(R.drawable.star_orange);
+  }
+
+  @Override
+  public void showConflictPopup(String message) {
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    alertDialogBuilder.setTitle(R.string.timing_overlap_header);
+    alertDialogBuilder.setMessage(message);
+    AlertDialog dialog = alertDialogBuilder.create();
+    dialog.show();
   }
 
   @Override
