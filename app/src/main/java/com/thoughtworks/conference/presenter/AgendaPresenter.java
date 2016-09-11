@@ -19,7 +19,8 @@ public class AgendaPresenter {
     this.agendaView = agendaView;
   }
 
-  public void fetchEvents() {
+  public void presentConference() {
+    agendaView.showProgressDialog();
     apiClient.get(new APIClientCallback<Conference>() {
       List<List<Session>> sessionsByCategory = new ArrayList<>();
       @Override
@@ -29,6 +30,7 @@ public class AgendaPresenter {
           sessionsByCategory.add(sessions);
         }
         agendaView.render(sessionsByCategory);
+        agendaView.dismissProgressDialog();
       }
 
       @Override

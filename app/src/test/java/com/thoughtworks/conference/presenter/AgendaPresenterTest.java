@@ -9,6 +9,7 @@ import com.thoughtworks.conference.view.AgendaView;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -19,6 +20,7 @@ import static com.thoughtworks.conference.testdata.TestDataCreator.parseDate;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -29,14 +31,13 @@ public class AgendaPresenterTest {
   private AgendaPresenter agendaPresenter;
   private Conference conference;
   private AgendaView mockAgendaView;
-  private Session session1;
-  private Session session2;
+  private List<List<Session>> sessionsByCategory;
 
   @Before
   public void setUp() {
-    session1 = new Session("Create_Session", "description1", parseDate("2016-06-26T03:30:00+05:30"),
+    Session session1 = new Session("Create_Session", "description1", parseDate("2016-06-26T03:30:00+05:30"),
         parseDate("2016-06-26T05:30:00+05:30"), Category.CREATE, "location1");
-    session2 = new Session("Belong_Session", "description2", parseDate("2016-06-26T04:00:00+05:30"),
+    Session session2 = new Session("Belong_Session", "description2", parseDate("2016-06-26T04:00:00+05:30"),
         parseDate("2016-06-26T05:30:00+05:30"), Category.BELONG, "location2");
     conference = new Conference(session1, session2);
     mockApiClient = mock(APIClient.class);
@@ -50,17 +51,8 @@ public class AgendaPresenterTest {
         return null;
       }
     }).when(mockApiClient).get(any(APIClientCallback.class));
-  }
 
-  @Test
-  public void shouldCallApiClient() {
-    agendaPresenter.fetchEvents();
-    verify(mockApiClient, times(1)).get(any(APIClientCallback.class));
-  }
-
-  @Test
-  public void shouldRenderViewOnApiResponse(){
-    List<List<Session>> sessionsByCategory = new ArrayList<>();
+    sessionsByCategory = new ArrayList<>();
     List<Session> createSessionList = new ArrayList<>();
     createSessionList.add(session1);
     List<Session> aspireSessionList = new ArrayList<>();
@@ -69,8 +61,28 @@ public class AgendaPresenterTest {
     sessionsByCategory.add(createSessionList);
     sessionsByCategory.add(aspireSessionList);
     sessionsByCategory.add(belongSessionList);
+  }
 
-    agendaPresenter.fetchEvents();
+  @Test
+  public void shouldCallApiClient() {
+    agendaPresenter.presentConference();
+    verify(mockApiClient, times(1)).get(any(APIClientCallback.class));
+  }
+
+  @Test
+  public void shouldRenderViewOnApiResponse(){
+    agendaPresenter.presentConference();
     verify(mockAgendaView, times(1)).render(eq(sessionsByCategory));
+  }
+
+  @Test
+  public void showProgressDialogAndRenderResponseAndHideDialogInOrder(){
+    agendaPresenter.presentConference();
+
+    InOrder inOrder = inOrder(mockAgendaView, mockApiClient);
+    inOrder.verify(mockAgendaView).showProgressDialog();
+    inOrder.verify(mockApiClient).get(any(APIClientCallback.class));
+    inOrder.verify(mockAgendaView).render(eq(sessionsByCategory));
+    inOrder.verify(mockAgendaView).dismissProgressDialog();
   }
 }

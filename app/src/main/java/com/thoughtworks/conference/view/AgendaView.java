@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface AgendaView {
   void render(List<List<Session>> conference);
+
+  void showProgressDialog();
+
+  void dismissProgressDialog();
 }
